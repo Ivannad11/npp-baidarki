@@ -1,0 +1,86 @@
+/* ============================================================
+   header.css — ЕДИНАЯ шапка .npp-hd для ВСЕХ страниц.
+   Подключается ПОСЛЕДНИМ на каждой странице → перебивает любые
+   базовые стили (webflow.css / site.css). Все размеры явные,
+   ничего не наследуется от body — рендерится одинаково везде.
+   ============================================================ */
+.npp-hd, .npp-hd *{ box-sizing:border-box; }
+.npp-hd{
+  position:sticky; top:0; z-index:1000;
+  background:#fff;
+  border-bottom:1px solid #E7E5F1;
+  box-shadow:0 6px 24px -20px rgba(6,3,34,.5);
+  font-family:"Manrope",-apple-system,"Segoe UI",Roboto,Arial,sans-serif !important;
+}
+.npp-hd__inner{
+  max-width:1180px; margin:0 auto; height:74px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:24px; padding:0 clamp(18px,5vw,32px);
+}
+.npp-brand{ display:flex; align-items:center; flex-shrink:0; text-decoration:none; line-height:1; }
+.npp-brand img{ height:38px !important; width:auto !important; display:block; }
+
+.npp-nav{ display:flex; align-items:center; gap:28px; }
+.npp-nav a{
+  font-family:inherit !important;
+  font-size:15px !important; line-height:1 !important; font-weight:600 !important;
+  color:#16132E; text-decoration:none; letter-spacing:0;
+  transition:color .15s;
+}
+.npp-nav a:hover, .npp-nav a.is-current{ color:#140C64; }
+
+.npp-hd__right{ display:flex; align-items:center; gap:18px; }
+.npp-phone{
+  font-family:inherit !important;
+  font-weight:800 !important; font-size:16px !important; line-height:1 !important;
+  color:#060322; text-decoration:none; white-space:nowrap;
+}
+.npp-cta{
+  display:inline-flex; align-items:center; line-height:1 !important;
+  background:#140C64; color:#fff !important;
+  font-family:inherit !important; font-weight:700 !important; font-size:15px !important;
+  padding:13px 24px !important; border-radius:999px; text-decoration:none;
+  border:0; cursor:pointer; transition:background .18s, transform .18s;
+}
+.npp-cta:hover{ background:#2A1F8C; transform:translateY(-2px); }
+
+.npp-burger{ display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:8px; }
+.npp-burger span{ width:24px; height:2px; background:#060322; border-radius:2px; }
+
+@media (max-width:860px){
+  .npp-nav, .npp-phone{ display:none; }
+  .npp-burger{ display:flex; }
+  .npp-nav.open{
+    display:flex; flex-direction:column; gap:18px;
+    position:absolute; top:74px; left:0; right:0;
+    background:#fff; border-bottom:1px solid #E7E5F1;
+    padding:22px clamp(18px,5vw,32px);
+    box-shadow:0 24px 60px -28px rgba(20,12,100,.34);
+  }
+}
+
+/* ============================================================
+   ЕДИНЫЙ ФУТЕР .npp-ft (одинаковый на всех страницах)
+   ============================================================ */
+.npp-ft{ background:#060322; color:rgba(255,255,255,.7); font-family:"Manrope",-apple-system,"Segoe UI",Roboto,Arial,sans-serif; padding:clamp(40px,6vw,64px) 0; }
+.npp-ft *{ box-sizing:border-box; }
+.npp-ft__inner{ max-width:1180px; margin:0 auto; padding:0 clamp(18px,5vw,32px); display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:32px; }
+.npp-ft__col h4{ color:#fff; font-size:15px; margin:0 0 14px; font-weight:700; }
+.npp-ft__col a{ display:block; color:rgba(255,255,255,.7); font-size:15px; line-height:2; text-decoration:none; }
+.npp-ft__col a:hover{ color:#fff; }
+.npp-ft__col span{ display:block; color:rgba(255,255,255,.7); font-size:15px; line-height:2; }
+.npp-ft__brand img{ height:40px; filter:brightness(0) invert(1); opacity:.92; margin-bottom:16px; display:block; }
+.npp-ft__brand p{ font-size:15px; line-height:1.6; margin:0; max-width:36ch; }
+.npp-ft__bottom{ max-width:1180px; margin:36px auto 0; padding:22px clamp(18px,5vw,32px) 0; border-top:1px solid rgba(255,255,255,.12); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:13px; }
+@media(max-width:760px){ .npp-ft__inner{ grid-template-columns:1fr; } }
+
+/* Мобильная шапка — компактный аккуратный блок */
+@media (max-width:860px){
+  .npp-hd__inner{ height:62px; gap:10px; padding:0 16px; }
+  .npp-brand img{ height:30px !important; }
+  .npp-cta{ padding:9px 16px !important; font-size:14px !important; }
+  .npp-burger{ padding:6px; }
+}
+@media (max-width:380px){
+  .npp-cta{ display:none; }
+}

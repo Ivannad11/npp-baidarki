@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Каталог — байдарки и комплектующие · НИЖПРОМПЛАСТ</title>
+<meta name="description" content="Каталог НИЖПРОМПЛАСТ: пластиковые байдарки БД-2 и БД-3, вёсла, кресла, кили, гермомешки и другие комплектующие.">
+<link rel="icon" href="assets/npp_logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/header.css"/>
+</head>
+<body>
+
+<header class="npp-hd">
+  <div class="npp-hd__inner">
+    <a href="index.html" class="npp-brand"><img src="assets/npp_logo.svg" alt="НИЖПРОМПЛАСТ"></a>
+    <nav class="npp-nav" id="nppnav">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html" class="is-current">Каталог</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="optom.html">Для оптовиков</a>
+    </nav>
+    <div class="npp-hd__right">
+      <a href="tel:+78310000000" class="npp-phone">+7 (831) 000-00-00</a>
+      <a href="contacts.html" class="npp-cta">Связаться</a>
+      <button class="npp-burger" id="nppburger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<script>(function(){var b=document.getElementById('nppburger'),n=document.getElementById('nppnav');if(b)b.addEventListener('click',function(){n.classList.toggle('open');});})();</script>
+
+<!-- Заголовок раздела -->
+<section class="section" style="padding-bottom:0">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Каталог</span>
+      <h2 class="h2">Байдарки и <span class="ac">комплектующие</span></h2>
+      <p class="lead">Всё производство НИЖПРОМПЛАСТ в одном месте. Цены и наличие — уточняйте у менеджера.</p>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter is-active" data-filter="all">Все</button>
+      <button class="filter" data-filter="boats">Байдарки</button>
+      <button class="filter" data-filter="parts">Комплектующие</button>
+    </div>
+  </div>
+</section>
+
+<!-- Сетка товаров -->
+<section class="section" style="padding-top:34px">
+  <div class="container">
+    <div class="catalog" id="catalog">
+
+      <!-- Байдарки -->
+      <article class="product" data-cat="boats">
+        <div class="product__media"><span class="product__badge">Байдарка</span><img src="assets/69d2569373a3a77ff844c822_b2-1n.webp" alt="БД-2"></div>
+        <div class="product__body">
+          <span class="product__cat">Байдарки</span>
+          <div class="product__name">БД-2</div>
+          <p class="product__desc">Двухместная туристическая. Длина ≈ 4,2 м, до 220 кг. Красный и синий.</p>
+          <div class="product__foot"><div class="product__price">от 00 000 ₽<small>цена — уточнить</small></div><a href="contacts.html" class="btn btn--primary">Заказать</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-cat="boats">
+        <div class="product__media"><span class="product__badge">Байдарка</span><img src="assets/69d2581a88b2727280bdcb4f_b3-1n.webp" alt="БД-3"></div>
+        <div class="product__body">
+          <span class="product__cat">Байдарки</span>
+          <div class="product__name">БД-3</div>
+          <p class="product__desc">Трёхместная туристическая. Длина ≈ 5,0 м, до 320 кг. Красный и синий.</p>
+          <div class="product__foot"><div class="product__price">от 00 000 ₽<small>цена — уточнить</small></div><a href="contacts.html" class="btn btn--primary">Заказать</a></div>
+        </div>
+      </article>
+
+      <!-- Комплектующие -->
+      <article class="product" data-cat="parts">
+        <div class="product__media"><img src="assets/699e1a2d52baad6489740c45_3-1.jpg" alt="Анатомическое кресло"></div>
+        <div class="product__body">
+          <span class="product__cat">Комплектующие</span>
+          <div class="product__name">Анатомическое кресло</div>
+          <p class="product__desc">Регулируемая спинка, опора для спины на весь день. Возможен детский вариант.</p>
+          <div class="product__foot"><div class="product__price">от 0 000 ₽<small>цена — уточнить</small></div><a href="contacts.html" class="btn btn--outline">В заявку</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-cat="parts">
+        <div class="product__media"><img src="assets/699e31a62a4a1c3da6f5c545_5-2.avif" alt="Гермомешок"></div>
+        <div class="product__body">
+          <span class="product__cat">Комплектующие</span>
+          <div class="product__name">Гермомешок в отсек</div>
+          <p class="product__desc">Держит вещи сухими в герметичном заднем отсеке байдарки.</p>
+          <div class="product__foot"><div class="product__price">от 0 000 ₽<small>цена — уточнить</small></div><a href="contacts.html" class="btn btn--outline">В заявку</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-cat="parts">
+        <div class="product__media"><img src="assets/699e530728d7357f5953fed8_Frame%201.avif" alt="Держатель весла и леер"></div>
+        <div class="product__body">
+          <span class="product__cat">Комплектующие</span>
+          <div class="product__name">Держатель весла + леер</div>
+          <p class="product__desc">Эластичный шнур под весло и леер безопасности по периметру корпуса.</p>
+          <div class="product__foot"><div class="product__price">от 0 000 ₽<small>цена — уточнить</small></div><a href="contacts.html" class="btn btn--outline">В заявку</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-cat="parts">
+        <div class="product__media"><img src="assets/699e31a79cb63a5649bd9ef0_5-1.avif" alt="Усиленный киль"></div>
+        <div class="product__body">
+          <span class="product__cat">Комплектующие</span>
+          <div class="product__name">Усиленный киль</div>
+          <p class="product__desc">Носовой и кормовой кили — для курсовой устойчивости на течении.</p>
+          <div class="product__foot"><div class="product__price">от 0 000 ₽<small>цена — уточнить</small></div><a href="contacts.html" class="btn btn--outline">В заявку</a></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- Подвал -->
+<footer class="npp-ft">
+  <div class="npp-ft__inner">
+    <div class="npp-ft__col npp-ft__brand">
+      <img src="assets/npp_logo.svg" alt="НИЖПРОМПЛАСТ">
+      <p>Производство пластиковых байдарок БД-2 и БД-3 и комплектующих. Прямые поставки от завода в Нижнем Новгороде.</p>
+    </div>
+    <div class="npp-ft__col">
+      <h4>Навигация</h4>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="optom.html">Для оптовиков</a>
+    </div>
+    <div class="npp-ft__col">
+      <h4>Контакты</h4>
+      <a href="tel:+78310000000">+7 (831) 000-00-00</a>
+      <a href="mailto:info@npp-nn.ru">info@npp-nn.ru</a>
+      <span>г. Нижний Новгород</span>
+    </div>
+  </div>
+  <div class="npp-ft__bottom">
+    <span>© 2026 НИЖПРОМПЛАСТ. Все права защищены.</span>
+    <span>Тексты и фото — предварительные, под замену.</span>
+  </div>
+</footer>
+
+<script>
+  var b=document.getElementById('burger'), n=document.getElementById('nav');
+  if(b){b.addEventListener('click',function(){n.classList.toggle('is-open');});}
+  // фильтры каталога
+  var filters=document.querySelectorAll('.filter'), items=document.querySelectorAll('.product');
+  filters.forEach(function(f){
+    f.addEventListener('click',function(){
+      filters.forEach(function(x){x.classList.remove('is-active');});
+      f.classList.add('is-active');
+      var v=f.getAttribute('data-filter');
+      items.forEach(function(it){
+        it.classList.toggle('is-hidden', !(v==='all' || it.getAttribute('data-cat')===v));
+      });
+    });
+  });
+</script>
+</body>
+</html>

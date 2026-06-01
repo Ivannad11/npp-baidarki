@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Контакты · НИЖПРОМПЛАСТ</title>
+<meta name="description" content="Контакты НИЖПРОМПЛАСТ: телефон, почта, адрес производства в Нижнем Новгороде. Заявка на байдарки БД-2 и БД-3.">
+<link rel="icon" href="assets/npp_logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/header.css"/>
+</head>
+<body>
+
+<header class="npp-hd">
+  <div class="npp-hd__inner">
+    <a href="index.html" class="npp-brand"><img src="assets/npp_logo.svg" alt="НИЖПРОМПЛАСТ"></a>
+    <nav class="npp-nav" id="nppnav">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="contacts.html" class="is-current">Контакты</a>
+      <a href="optom.html">Для оптовиков</a>
+    </nav>
+    <div class="npp-hd__right">
+      <a href="tel:+78310000000" class="npp-phone">+7 (831) 000-00-00</a>
+      <a href="contacts.html" class="npp-cta">Связаться</a>
+      <button class="npp-burger" id="nppburger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<script>(function(){var b=document.getElementById('nppburger'),n=document.getElementById('nppnav');if(b)b.addEventListener('click',function(){n.classList.toggle('open');});})();</script>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Контакты</span>
+      <h2 class="h2">Свяжитесь с <span class="ac">НИЖПРОМПЛАСТ</span></h2>
+      <p class="lead">Ответим на вопросы по моделям, цветам, комплектующим и доставке.</p>
+    </div>
+
+    <div class="contacts">
+      <div class="contact-card">
+        <div class="contact-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></div>
+        <h3>Телефон</h3>
+        <a href="tel:+78310000000">+7 (831) 000-00-00</a><br>
+        <span>Пн–Пт, 9:00–18:00</span>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></div>
+        <h3>Почта</h3>
+        <a href="mailto:info@npp-nn.ru">info@npp-nn.ru</a><br>
+        <a href="mailto:opt@npp-nn.ru">opt@npp-nn.ru</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>Адрес</h3>
+        <p>г. Нижний Новгород</p>
+        <span>Точный адрес — уточнить</span>
+      </div>
+    </div>
+
+    <div class="map-holder">Карта — подключим Яндекс.Карты после согласования адреса</div>
+  </div>
+</section>
+
+<!-- Форма -->
+<section class="section" id="form" style="padding-top:0">
+  <div class="container">
+    <div class="cta">
+      <div>
+        <h2>Оставить заявку</h2>
+        <p>Напишите, что интересует — модель, цвет, комплектующие или опт. Перезвоним и рассчитаем стоимость.</p>
+      </div>
+      <form class="form" onsubmit="alert('Заявка отправлена (демо). Подключим реальную форму.');return false;">
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <input type="tel" name="phone" placeholder="Телефон" required>
+        <select name="model">
+          <option value="">Что интересует?</option>
+          <option>БД-2 (двухместная)</option>
+          <option>БД-3 (трёхместная)</option>
+          <option>Комплектующие</option>
+          <option>Опт</option>
+        </select>
+        <button type="submit" class="btn btn--light">Отправить</button>
+        <span class="form__note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</span>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="npp-ft">
+  <div class="npp-ft__inner">
+    <div class="npp-ft__col npp-ft__brand">
+      <img src="assets/npp_logo.svg" alt="НИЖПРОМПЛАСТ">
+      <p>Производство пластиковых байдарок БД-2 и БД-3 и комплектующих. Прямые поставки от завода в Нижнем Новгороде.</p>
+    </div>
+    <div class="npp-ft__col">
+      <h4>Навигация</h4>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="optom.html">Для оптовиков</a>
+    </div>
+    <div class="npp-ft__col">
+      <h4>Контакты</h4>
+      <a href="tel:+78310000000">+7 (831) 000-00-00</a>
+      <a href="mailto:info@npp-nn.ru">info@npp-nn.ru</a>
+      <span>г. Нижний Новгород</span>
+    </div>
+  </div>
+  <div class="npp-ft__bottom">
+    <span>© 2026 НИЖПРОМПЛАСТ. Все права защищены.</span>
+    <span>Тексты и фото — предварительные, под замену.</span>
+  </div>
+</footer>
+
+<script>
+  var b=document.getElementById('burger'), n=document.getElementById('nav');
+  if(b){b.addEventListener('click',function(){n.classList.toggle('is-open');});}
+</script>
+</body>
+</html>
