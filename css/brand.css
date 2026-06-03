@@ -403,3 +403,28 @@ h3.heading_2{ padding-left:clamp(20px,5vw,72px) !important; }
   .npp-card__body p{ font-size:13.5px !important; line-height:1.45; }
   .npp-card__img{ height:160px !important; flex:0 0 160px !important; }
 }
+
+/* Особенности Волжанки-2 — карточка «Больше контроля»: фото на всю ширину, прижато к низу (как 1-я карточка) */
+.div-block-97{ position:relative; overflow:hidden; padding-bottom:0 !important; }
+.image-131{
+  max-width:none !important;
+  width:calc(100% + 48px) !important;   /* перекрываем боковой padding 24px */
+  margin:auto -24px 0 -24px !important;  /* auto сверху — прижать вниз; края до бортов карточки */
+  border-radius:0 !important;
+  object-fit:cover;
+  display:block;
+}
+
+/* Особенности Волжанки-2: единые отступы + текст к нижнему краю.
+   div-block-98 / div-block-117 — это контент-блоки карточек 1 и 3 (фото + h3 + p). */
+.div-block-96 .heading_3{ margin:0 0 10px 0 !important; }      /* единый отступ заголовок → список */
+.div-block-96 .p_3{ margin:0 !important; }
+.div-block-96 .div-block-97{ row-gap:0 !important; }
+.div-block-96{ align-items:stretch !important; }
+.div-block-96 .div-block-99,
+.div-block-96 .div-block-101{ display:flex !important; flex-direction:column !important; }
+/* контент-блок карточки = flex-колонка на всю высоту; заголовок прижат к низу через auto-распор */
+.div-block-96 .div-block-98,
+.div-block-96 .div-block-117{ display:flex !important; flex-direction:column !important; height:100% !important; box-sizing:border-box; }
+.div-block-96 .div-block-98 > .heading_3,
+.div-block-96 .div-block-117 > .heading_3{ margin-top:auto !important; }
