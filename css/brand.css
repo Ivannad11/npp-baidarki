@@ -438,3 +438,11 @@ h3.heading_2{ padding-left:clamp(20px,5vw,72px) !important; }
   height:300px !important; object-fit:cover !important;
   border-radius:10px; margin:0 0 16px 0 !important;
 }
+
+/* Мобильные карточки: top-down лодки без фона показывать целиком */
+.npp-cards--mobile .npp-card__img img[src*="b2-1n"],
+.npp-cards--mobile .npp-card__img img[src*="b3-1n"]{
+  object-fit:contain !important;
+  background:#F7F6FB;
+  padding:8px;
+}
