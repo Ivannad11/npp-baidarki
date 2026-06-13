@@ -446,3 +446,16 @@ h3.heading_2{ padding-left:clamp(20px,5vw,72px) !important; }
   background:#F7F6FB;
   padding:8px;
 }
+
+/* Блок «Не боится ударов, переездов и зимовок» (section-10): одинаковые квадратные фото */
+.section-10 .image-133,
+.section-10 .image-134,
+.section-10 .image-135{
+  width:100% !important;
+  height:auto !important;
+  aspect-ratio:1/1 !important;
+  object-fit:cover !important;
+  border-radius:14px;
+  display:block;
+}
+.section-10 .div-block-104 > div:first-child{ width:100%; }
