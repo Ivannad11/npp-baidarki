@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Оптовикам — байдарки Волжанка-2 и Волжанка-3 от Волгаформпласт</title>
-<meta name="description" content="Оптовые поставки пластиковых байдарок Волжанка-2 и Волжанка-3 от производителя. Цена по запросу, отгрузка по РФ, поддержка дилеров.">
+<title>Оптовикам — байдарки Волжанка 2.0 и Волжанка 3.0 от Волгаформпласт</title>
+<meta name="description" content="Оптовые поставки пластиковых байдарок Волжанка 2.0 и Волжанка 3.0 от производителя. Цена по запросу, отгрузка по РФ, поддержка дилеров.">
 <link rel="icon" href="assets/npp_logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
       <a href="optom.html" class="is-current">Для оптовиков</a>
     </nav>
     <div class="npp-hd__right">
-      <a href="tel:+78310000000" class="npp-phone">+7 (831) 000-00-00</a>
+      <a href="tel:+79202519547" class="npp-phone">+7 (920) 251-95-47</a>
       <a href="contacts.html" class="npp-cta">Связаться</a>
       <button class="npp-burger" id="nppburger" aria-label="Меню"><span></span><span></span><span></span></button>
     </div>
@@ -39,7 +39,7 @@
     <div class="hero__text">
       <span class="hero__badge">● Оптовый отдел Волгаформпласт</span>
       <h1>Байдарки <em>оптом</em> от завода</h1>
-      <p class="hero__lead">Прямые поставки Волжанки-2 и Волжанки-3 без посредников. Цена по запросу, зависит от объёма, отгружаем по всей России. Поддерживаем дилеров и прокатные базы.</p>
+      <p class="hero__lead">Прямые поставки Волжанки 2.0 и Волжанки 3.0 без посредников. Цена по запросу, зависит от объёма, отгружаем по всей России. Поддерживаем дилеров и прокатные базы.</p>
       <div class="hero__actions">
         <a href="#optform" class="btn btn--light">Запросить прайс</a>
         <a href="index.html" class="btn btn--ghost">К розничному сайту</a>
@@ -52,11 +52,7 @@
     </div>
     <div class="hero__media">
       <div class="photo photo--hero">
-        <svg viewBox="0 0 400 200" aria-hidden="true">
-          <path d="M8 78 C70 50 150 48 200 50 C285 52 360 58 392 76 C360 94 285 98 200 96 C150 96 70 96 8 78 Z" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.55)" stroke-width="2"/>
-          <path d="M8 138 C70 110 150 108 200 110 C285 112 360 118 392 136 C360 154 285 158 200 156 C150 156 70 156 8 138 Z" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.55)" stroke-width="2"/>
-        </svg>
-        <span class="photo__tag">фото партии байдарок — заменить</span>
+        <img src="assets/npp-optom-hero.png?v=2" alt="Волжанка 2.0 — байдарки оптом" style="width:100%;height:auto;display:block;filter:drop-shadow(0 18px 40px rgba(0,0,0,.25));">
       </div>
     </div>
   </div>
@@ -109,9 +105,9 @@
     <table class="specs">
       <thead><tr><th>Модель</th><th>Мест</th><th>Цвета</th><th>Опт. цена</th></tr></thead>
       <tbody>
-        <tr><td><b>Волжанка-2</b> — двухместная</td><td>2</td><td>оранжевый, синий, жёлтый, красный</td><td>по запросу</td></tr>
-        <tr><td><b>Волжанка-3</b> — трёхместная</td><td>3</td><td>оранжевый, синий, жёлтый, красный</td><td>по запросу</td></tr>
-        <tr><td>Комплектующие</td><td colspan="2">вёсла, кресла, кили, фартуки</td><td>по запросу</td></tr>
+        <tr><td><b>Волжанка 2.0</b> — двухместная</td><td>2</td><td>оранжевый, синий, жёлтый, красный</td><td>по запросу</td></tr>
+        <tr><td><b>Волжанка 3.0</b> — трёхместная</td><td>3</td><td>оранжевый, синий, жёлтый, красный</td><td>по запросу</td></tr>
+        <tr><td>Комплектующие</td><td colspan="2">вёсла, кресла, фартуки, подстаканники</td><td>по запросу</td></tr>
       </tbody>
     </table>
   </div>
@@ -125,7 +121,7 @@
         <h2>Запросить оптовый прайс</h2>
         <p>Оставьте контакты и ориентировочный объём — пришлём прайс, скидочную сетку и условия отгрузки.</p>
       </div>
-      <form class="form" onsubmit="alert('Запрос отправлен (демо). Подключим реальную форму.');return false;">
+      <form class="form" onsubmit="return nppMail(this,'Запрос оптового прайса')">
         <input type="text" name="company" placeholder="Компания / ИП" required>
         <input type="text" name="name" placeholder="Контактное лицо" required>
         <input type="tel" name="phone" placeholder="Телефон" required>
@@ -147,7 +143,7 @@
   <div class="npp-ft__inner">
     <div class="npp-ft__col npp-ft__brand">
       <img src="assets/npp_logo.svg" alt="Волгаформпласт">
-      <p>Производство пластиковых байдарок Волжанка-2 и Волжанка-3 и комплектующих. Прямые поставки от завода в Нижнем Новгороде.</p>
+      <p>Производство пластиковых байдарок Волжанка 2.0 и Волжанка 3.0 и комплектующих. Прямые поставки от завода в Нижнем Новгороде.</p>
     </div>
     <div class="npp-ft__col">
       <h4>Навигация</h4>
@@ -158,14 +154,14 @@
     </div>
     <div class="npp-ft__col">
       <h4>Контакты</h4>
-      <a href="tel:+78310000000">+7 (831) 000-00-00</a>
-      <a href="mailto:info@npp-nn.ru">info@npp-nn.ru</a>
+      <a href="tel:+79202519547">+7 (920) 251-95-47</a>
+      <a href="mailto:shakolin@npp-nn.ru">shakolin@npp-nn.ru</a>
       <span>г. Нижний Новгород</span>
     </div>
   </div>
   <div class="npp-ft__bottom">
     <span>© 2026 ООО ПКФ «Волгаформпласт». Все права защищены.</span>
-    <span>Тексты и фото — предварительные, под замену.</span>
+    <span>Сайт разработан <a href="https://naeza.ru" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">naeza.ru</a></span>
   </div>
 </footer>
 
@@ -174,5 +170,6 @@
   if(b){b.addEventListener('click',function(){n.classList.toggle('is-open');});}
   document.querySelectorAll('#nav a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('is-open');});});
 </script>
+<script>function nppMail(f,s){var d=[];f.querySelectorAll("input,select,textarea").forEach(function(e){if(e.type=="submit"||e.type=="hidden")return;if(e.type=="checkbox"&&!e.checked)return;var v=(e.value||"").trim();if(v&&v!=e.getAttribute("placeholder"))d.push((e.getAttribute("placeholder")||e.name||"Поле")+": "+v)});window.location.href="mailto:shakolin@npp-nn.ru?subject="+encodeURIComponent(s)+"&body="+encodeURIComponent(d.join("\n"));return false;}</script>
 </body>
 </html>

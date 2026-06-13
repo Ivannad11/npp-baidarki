@@ -428,3 +428,13 @@ h3.heading_2{ padding-left:clamp(20px,5vw,72px) !important; }
 .div-block-96 .div-block-117{ display:flex !important; flex-direction:column !important; height:100% !important; box-sizing:border-box; }
 .div-block-96 .div-block-98 > .heading_3,
 .div-block-96 .div-block-117 > .heading_3{ margin-top:auto !important; }
+
+/* Назначение байдарки (section-8): карточки одинакового размера */
+.section-8 .div-block-96{ align-items:stretch !important; }
+.section-8 .div-block-103{ height:auto !important; }
+.section-8 .div-block-102{ height:100% !important; box-sizing:border-box; justify-content:flex-start !important; }
+.section-8 .div-block-102 img{
+  width:100% !important; max-width:none !important;
+  height:300px !important; object-fit:cover !important;
+  border-radius:10px; margin:0 0 16px 0 !important;
+}

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Реж-сценарий НижПромПласт · v3.0 «Гибрид»</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#141a22; --panel2:#1a222d; --line:#243040;
+    --ink:#e8eef5; --mut:#8a98ab; --acc:#ff7a18; --acc2:#3fa9ff; --ok:#43d17a;
+    --warn:#ffd24a; --pink:#ff5d8f; --rad:14px; --maxw:980px;
+    --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Inter",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px 120px}
+
+  .hero{padding:64px 20px 40px;border-bottom:1px solid var(--line);
+    background:radial-gradient(1200px 400px at 70% -10%,rgba(255,122,24,.16),transparent 60%),
+               radial-gradient(900px 360px at 10% 0%,rgba(63,169,255,.12),transparent 55%);}
+  .hero-inner{max-width:var(--maxw);margin:0 auto}
+  .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}
+  h1{font-size:clamp(30px,6vw,52px);line-height:1.05;margin:0 0 6px;font-weight:800;letter-spacing:-.01em}
+  h1 .sub{display:block;font-size:clamp(15px,3vw,21px);font-weight:600;color:var(--mut);margin-top:12px;letter-spacing:0}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .chip{font-family:var(--mono);font-size:12px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink);background:var(--panel)}
+  .chip b{color:var(--acc)}
+
+  nav.toc{position:sticky;top:0;z-index:20;background:rgba(13,17,23,.86);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);margin-bottom:36px}
+  .toc-inner{max-width:var(--maxw);margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
+  .toc-inner::-webkit-scrollbar{display:none}
+  .toc a{flex:0 0 auto;font-size:13px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap;transition:.15s}
+  .toc a:hover{color:var(--ink);background:var(--panel2)}
+
+  section{margin:48px 0;scroll-margin-top:64px}
+  h2{font-size:13px;font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--acc2);
+    margin:0 0 8px;display:flex;align-items:center;gap:10px}
+  h2::before{content:"";width:26px;height:2px;background:var(--acc);border-radius:2px}
+  h3{font-size:24px;margin:6px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 14px}
+  .lead{font-size:18px;color:var(--ink)}
+  .mut{color:var(--mut)}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:22px 24px;margin:16px 0}
+  .card.accent{border-left:3px solid var(--acc)}
+  .card.blue{border-left:3px solid var(--acc2)}
+  .card.warn{border-left:3px solid var(--warn);background:linear-gradient(0deg,rgba(255,210,74,.04),transparent)}
+  .card.pink{border-left:3px solid var(--pink);background:linear-gradient(0deg,rgba(255,93,143,.05),transparent)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0;display:block;overflow-x:auto}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:600;white-space:nowrap}
+  td b{color:var(--acc)}
+  tr:hover td{background:rgba(255,255,255,.015)}
+
+  .changelog{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:16px 0}
+  @media(max-width:640px){.changelog{grid-template-columns:1fr}}
+  .changelog>div{padding:18px 20px}
+  .changelog .old{background:rgba(255,93,143,.05);border-right:1px solid var(--line)}
+  .changelog .new{background:rgba(67,209,122,.05)}
+  .changelog h4{margin:0 0 12px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  .changelog .old h4{color:var(--pink)} .changelog .new h4{color:var(--ok)}
+  .changelog ul{margin:0;padding:0;list-style:none}
+  .changelog li{padding:6px 0 6px 22px;position:relative;font-size:14px;border-bottom:1px solid rgba(255,255,255,.04)}
+  .changelog .old li::before{content:"✕";position:absolute;left:0;color:var(--pink)}
+  .changelog .new li::before{content:"✓";position:absolute;left:0;color:var(--ok)}
+
+  .part-head{display:flex;align-items:baseline;gap:14px;margin:40px 0 4px;padding-top:14px;border-top:1px dashed var(--line)}
+  .part-no{font-family:var(--mono);font-size:30px;font-weight:800;color:var(--acc);line-height:1}
+  .part-title{font-size:21px;font-weight:750}
+  .part-time{font-family:var(--mono);font-size:13px;color:var(--mut);margin-left:auto;white-space:nowrap}
+  .part-desc{color:var(--mut);font-size:14px;margin:2px 0 18px}
+  .part-head.goal .part-no{color:var(--pink)}
+
+  .shot{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:10px 0;
+    display:grid;grid-template-columns:64px 1fr;gap:16px;transition:.15s}
+  .shot:hover{border-color:#34465c}
+  .shot-id{font-family:var(--mono);font-weight:800;font-size:15px;color:var(--acc);text-align:center;
+    border-right:1px solid var(--line);padding-right:14px}
+  .shot-id small{display:block;font-size:10.5px;color:var(--mut);font-weight:500;margin-top:4px;letter-spacing:.04em}
+  .shot-body p{margin:0 0 8px}
+  .shot-tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+  .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;padding:3px 8px;border-radius:6px;border:1px solid var(--line)}
+  .tag.cr{color:var(--acc2);border-color:rgba(63,169,255,.35)}
+  .tag.fx{color:#c79bff;border-color:rgba(199,155,255,.35)}
+  .tag.snd{color:var(--ok);border-color:rgba(67,209,122,.35)}
+  .shot dl{margin:0;font-size:13.5px}
+  .shot dl div{display:flex;gap:8px;padding:2px 0}
+  .shot dt{color:var(--mut);font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;flex:0 0 64px;padding-top:2px}
+  .shot dd{margin:0}
+  .titr{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:11.5px;color:#0d1117;background:var(--warn);
+    padding:3px 10px;border-radius:6px;font-weight:700;letter-spacing:.03em}
+  .titr.offer{background:var(--pink);color:#fff}
+
+  .rhythm{background:linear-gradient(0deg,rgba(255,122,24,.05),transparent);border:1px dashed rgba(255,122,24,.4);
+    border-radius:12px;padding:14px 18px;margin:14px 0}
+  .rhythm h4{margin:0 0 4px;font-size:15px;color:var(--acc)}
+  .rhythm .beats{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 6px}
+  .beat{font-family:var(--mono);font-size:12.5px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;flex:1 1 140px}
+  .beat b{color:var(--acc2)}
+
+  blockquote{margin:0;padding:18px 22px;background:var(--panel2);border-left:3px solid var(--acc2);border-radius:0 10px 10px 0;
+    font-size:16.5px;line-height:1.8;color:var(--ink)}
+  blockquote .vo-mut{color:var(--mut);font-size:13px;display:block;margin-bottom:10px;font-family:var(--mono);letter-spacing:.04em}
+  blockquote .q{color:var(--acc2);font-weight:600}
+  blockquote .ofr{color:var(--pink);font-weight:600}
+
+  ul.clean{list-style:none;padding:0;margin:8px 0}
+  ul.clean li{padding:7px 0 7px 26px;border-bottom:1px solid var(--line);position:relative;font-size:14.5px}
+  ul.clean li::before{content:"▸";position:absolute;left:4px;color:var(--acc);top:7px}
+
+  .checklist h4{margin:18px 0 6px;font-size:14px;color:var(--acc2);font-family:var(--mono);letter-spacing:.05em;text-transform:uppercase}
+  .checklist li::before{content:"☐";color:var(--mut)}
+
+  .titres-list{display:flex;flex-wrap:wrap;gap:8px}
+  .titres-list span{font-family:var(--mono);font-size:12.5px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+  .titres-list span.key{background:var(--pink);color:#fff;border-color:var(--pink);font-weight:700}
+
+  footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:var(--mut);font-size:13px;font-family:var(--mono)}
+  a.up{color:var(--acc2);text-decoration:none}
+  @media print{ body{background:#fff;color:#111} nav.toc,.hero{position:static} .shot,.card{break-inside:avoid} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="kicker">Режиссёрский сценарий · v3.0 «Гибрид»</p>
+    <h1>ПОЛНЫЙ ЦИКЛ
+      <span class="sub">Имиджево-продающий ролик ООО «НижПромПласт» · npp-nn.ru</span>
+    </h1>
+    <div class="meta">
+      <span class="chip">⏱ <b>110–115 сек</b></span>
+      <span class="chip">🎙 Закадр + музыка + титры</span>
+      <span class="chip">🎬 <b>31 кадр</b></span>
+      <span class="chip">🎯 Драматургия заказчика</span>
+      <span class="chip">🎼 Визуал оркестра сохранён</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#why">Почему v3</a>
+    <a href="#sound">Звук</a>
+    <a href="#struct">Структура</a>
+    <a href="#board">Раскадровка</a>
+    <a href="#vo">Закадр</a>
+    <a href="#titres">Титры</a>
+    <a href="#shotlist">Шот-лист</a>
+    <a href="#notes">Продакшн</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ПОЧЕМУ -->
+<section id="why">
+  <h2>Почему версия 3.0</h2>
+  <h3>Тест «глазами заказчика» переписал драматургию</h3>
+  <p class="lead">Просмотр от лица главного инженера завода спецтехники показал: чистый «оркестр» красив, но <b>не продаёт</b> — не отвечает на вопросы клиента, прячет доказательства и применение в конце. v3.0 это чинит, сохранив визуальную силу.</p>
+
+  <div class="changelog">
+    <div class="old">
+      <h4>Было (v2.0 «Оркестр»)</h4>
+      <ul>
+        <li>Старт с атмосферы «о себе»</li>
+        <li>Нет конкретики и доказательств</li>
+        <li>Кейсы Урал/Mercedes — не показаны</li>
+        <li>Применение спрятано в финале (4 сек)</li>
+        <li>Клиповый монтаж 0.6 с — «понты»</li>
+        <li>Нет оффера и призыва к действию</li>
+      </ul>
+    </div>
+    <div class="new">
+      <h4>Стало (v3.0 «Гибрид»)</h4>
+      <ul>
+        <li>Старт с боли заказчика (крючок)</li>
+        <li>Каждый этап = ответ на вопрос клиента</li>
+        <li>Отдельный блок доказательств с кейсами</li>
+        <li>Готовые изделия — рано и подробно</li>
+        <li>Темп человечный 1.5–2 с — солидно</li>
+        <li>Оффер «пробная деталь по себестоимости»</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card accent">
+    <p style="margin:0"><b>Что оставили от «оркестра»:</b> звуки цеха как инструменты (фреза-бас, вакуум-бочка, лазер-стаккато, штангенциркуль-клик), кульминационный ритм-блок, игру фокусами, контровой свет. Теперь они <b>служат смыслу</b>, а не заменяют его.</p>
+  </div>
+
+  <div class="card pink">
+    <p style="margin:0">🎯 <b>Драматургия = воронка:</b> Крючок (боль) → Обещание (полный цикл) → Цикл-оркестр (как делаем) → Доказательства (нам доверяют) → Оффер (следующий шаг) → Кода.</p>
+  </div>
+</section>
+
+<!-- ЗВУК -->
+<section id="sound">
+  <h2>Звуковая партитура</h2>
+  <h3>Каждый цех = инструмент</h3>
+  <p class="mut">На съёмке <b style="color:var(--warn)">обязательно</b> писать чистый звук каждого процесса — материал для трека.</p>
+  <div class="card">
+  <table>
+    <tr><th>Процесс</th><th>«Инструмент»</th><th>Звук-акцент</th></tr>
+    <tr><td><b>Фрезеровка ЧПУ</b></td><td>бас / перкуссия</td><td>врезание фрезы</td></tr>
+    <tr><td><b>Вакуумная формовка</b></td><td>бочка (kick)</td><td>хлопок вакуума</td></tr>
+    <tr><td><b>Лазерная резка</b></td><td>стаккато</td><td>треск искр</td></tr>
+    <tr><td><b>Стеклопластик</b></td><td>шейкер</td><td>прокат валика</td></tr>
+    <tr><td><b>ОТК · штангенциркуль</b></td><td>хай-хэт / клик</td><td>смыкание шкалы</td></tr>
+    <tr><td><b>Конвейер</b></td><td>ритм-секция</td><td>стук деталей</td></tr>
+  </table>
+  </div>
+  <p class="mut" style="font-size:14px">Трек: индустриальный, ~100–110 BPM, нарастание к доказательствам, тёплое разрешение на оффере.</p>
+</section>
+
+<!-- СТРУКТУРА -->
+<section id="struct">
+  <h2>Структура</h2>
+  <h3>6 частей · воронка</h3>
+  <div class="card">
+  <table>
+    <tr><th>Часть</th><th>Название</th><th>Что</th><th>Тайминг</th></tr>
+    <tr><td><b>1</b></td><td>Крючок</td><td>Боль: деталь без чертежа / партия / идея</td><td>0–10</td></tr>
+    <tr><td><b>2</b></td><td>Обещание</td><td>«Закроем весь путь под одной крышей»</td><td>10–18</td></tr>
+    <tr><td><b>3</b></td><td>Цикл-оркестр</td><td>3D-скан → проект → ЧПУ → формовка → лазер → ОТК</td><td>18–68</td></tr>
+    <tr><td><b>4</b></td><td>Доказательства</td><td>Кейсы Урал/Mercedes/спецтехника, цифры</td><td>68–90</td></tr>
+    <tr><td><b>5</b></td><td>Оффер + призыв</td><td>«Пришлите чертёж», «пробная по себестоимости»</td><td>90–106</td></tr>
+    <tr><td><b>6</b></td><td>Кода</td><td>Лого, слоган, контакты</td><td>106–115</td></tr>
+  </table>
+  </div>
+</section>
+
+<!-- РАСКАДРОВКА -->
+<section id="board">
+  <h2>Покадровая раскадровка · 31 кадр</h2>
+  <p class="mut">Каждый кадр = один рисунок. <span class="tag cr">крупность</span> <span class="tag fx">фокус</span> <span class="tag snd">звук</span></p>
+
+  <!-- 1 КРЮЧОК -->
+  <div class="part-head goal"><span class="part-no">1</span><span class="part-title">Крючок · боль заказчика</span><span class="part-time">0–10 сек</span></div>
+  <p class="part-desc">Ролик про ТЕБЯ, а не про завод. Сразу узнаёшь свою задачу.</p>
+
+  <div class="shot"><div class="shot-id">К1<small>0–3 · КР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">КР</span><span class="tag fx">собирается на деталь</span><span class="tag snd">низкий тон</span></div>
+    <p>На стол ОТК руки кладут <b>старую изношенную деталь</b> (реальный потёртый образец без маркировки). Камера наезжает.</p>
+    <dl><div><dt>ЗК</dt><dd>«Изношенная деталь, к которой не осталось чертежей».</dd></div></dl>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К2<small>3–6 · СР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">СР</span><span class="tag fx">ГРИП на детали</span></div>
+    <p>Рядом — пустая папка без документации / инженер разводит руками над деталью («нет бумаг»).</p>
+    <dl><div><dt>ЗК</dt><dd>«Партия в десять штук — или в десять тысяч».</dd></div></dl>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К3<small>6–10 · ДЕТ→КР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ДЕТ→КР</span><span class="tag fx">rack: эскиз→деталь</span></div>
+    <p>Рука кладёт рядом <b>карандашный эскиз</b> на бумаге. Деталь + набросок в одном кадре.</p>
+    <dl><div><dt>ЗК</dt><dd>«Идея, которой ещё нет в металле».</dd></div></dl>
+  </div></div>
+
+  <!-- 2 ОБЕЩАНИЕ -->
+  <div class="part-head"><span class="part-no">2</span><span class="part-title">Обещание</span><span class="part-time">10–18 сек</span></div>
+  <p class="part-desc">«Закроем весь путь под одной крышей».</p>
+
+  <div class="shot"><div class="shot-id">К4<small>10–14 · ДАЛ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ДАЛ</span><span class="tag fx">глубокий</span><span class="tag snd">музыка вступает</span></div>
+    <p>Цех оживает: широкий план, мастера за станками, свет. Масштаб и уверенность.</p>
+    <dl><div><dt>Камера</dt><dd>плавная проводка вглубь</dd></div><div><dt>ЗК</dt><dd>«Для НижПромПласт — обычная работа».</dd></div></dl>
+    <span class="titr">ПОЛНЫЙ ЦИКЛ ПОД ОДНОЙ КРЫШЕЙ</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К5<small>14–18 · ОБЩ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ОБЩ</span><span class="tag fx">проводка через глубину</span></div>
+    <p>Проброс-тизер: камера летит мимо нескольких этапов (фреза → искра → паллета) в одном движении — «всё здесь».</p>
+    <dl><div><dt>Камера</dt><dd>быстрый gimbal-проброс</dd></div><div><dt>ЗК</dt><dd>— (пауза, проброс под музыку)</dd></div></dl>
+  </div></div>
+
+  <!-- 3 ЦИКЛ -->
+  <div class="part-head"><span class="part-no">3</span><span class="part-title">Цикл-оркестр · как делаем</span><span class="part-time">18–68 сек</span></div>
+  <p class="part-desc">Каждый этап — ответ на вопрос заказчика. Визуал и звук оркестра, но темп человечный.</p>
+
+  <div class="shot"><div class="shot-id">К6<small>18–22 · СР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">СР</span><span class="tag fx">ГРИП на линии скана</span></div>
+    <p><b>3D-СКАН</b> (вынесен вперёд — сильнейший аргумент). Сканер водит лучом по <b>той самой детали из крючка</b> — связка!</p>
+    <dl><div><dt>ЗК</dt><dd>«3D-сканирование снимает размеры с любой детали…»</dd></div></dl>
+    <span class="titr">3D-СКАНИРОВАНИЕ · РЕИНЖИНИРИНГ</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К7<small>22–25 · ДЕТ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ДЕТ</span><span class="tag fx">собирается на модель</span></div>
+    <p>Монитор: облако точек превращается в 3D-модель.</p>
+    <dl><div><dt>ЗК</dt><dd>«…даже без документации».</dd></div></dl>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К8<small>25–29 · СР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">СР</span><span class="tag fx">rack: рука→экран</span></div>
+    <p><b>ПРОЕКТИРОВАНИЕ.</b> Конструктор за CAD, на экране модель детали вращается.</p>
+    <dl><div><dt>ЗК</dt><dd>«Конструкторы считают…»</dd></div></dl>
+    <span class="titr">ПРОЕКТИРОВАНИЕ</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К9<small>29–33 · ОБЩ→ДЕТ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ОБЩ→ДЕТ</span><span class="tag fx">rack: фон→фреза</span><span class="tag snd">🎵 БАС = фреза</span></div>
+    <p><b>ФРЕЗЕРОВКА ЧПУ.</b> Фреза врезается в оснастку, стружка летит в контровом.</p>
+    <dl><div><dt>ЗК</dt><dd>«…технологи готовят оснастку на станках ЧПУ».</dd></div></dl>
+    <span class="titr">ФРЕЗЕРОВКА ЧПУ</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К10<small>33–37 · ОБЩ→СР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ОБЩ→СР</span><span class="tag fx">ГРИП на кромке формы</span><span class="tag snd">🎵 БОЧКА = вакуум</span></div>
+    <p><b>ВАКУУМНАЯ ФОРМОВКА.</b> Термошкаф светится, лист пластика обтягивает форму, мастер опускает раму.</p>
+    <dl><div><dt>ЗК</dt><dd>«Вакуумная формовка…»</dd></div></dl>
+    <span class="titr">ВАКУУМНАЯ ФОРМОВКА</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К11<small>37–40 · СР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">СР</span><span class="tag fx">на руках с валиком</span><span class="tag snd">🎵 ШЕЙКЕР = прокат</span></div>
+    <p><b>СТЕКЛОПЛАСТИК.</b> Мастер прокатывает валиком смолу по стекломату.</p>
+    <dl><div><dt>ЗК</dt><dd>«…стеклопластик…»</dd></div></dl>
+    <span class="titr">СТЕКЛОПЛАСТИК</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К12<small>40–43 · КР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">КР</span><span class="tag fx">rack: рука→деталь</span></div>
+    <p><b>ППУ.</b> Руки формуют/зачищают изделие из пенополиуретана.</p>
+    <dl><div><dt>ЗК</dt><dd>«…пенополиуретан».</dd></div></dl>
+    <span class="titr">ИЗДЕЛИЯ ИЗ ППУ</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К13<small>43–46 · СР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">СР</span><span class="tag fx">деталь резко, мастер боке</span></div>
+    <p>Закрепляем: мастер держит готовую отформованную деталь, поворачивает к свету (уверенный жест).</p>
+    <dl><div><dt>ЗК</dt><dd>«Технология — под конкретную деталь».</dd></div></dl>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К14<small>46–50 · ДАЛ→СР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ДАЛ→СР</span><span class="tag fx">собирается на рез</span><span class="tag snd">🎵 СТАККАТО = искры</span></div>
+    <p><b>ЛАЗЕР.</b> Тёмный цех, проводка к зоне реза, сноп искр.</p>
+    <dl><div><dt>ЗК</dt><dd>«Лазерная резка держит контур…»</dd></div></dl>
+    <span class="titr">ЛАЗЕРНАЯ РЕЗКА</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К15<small>50–53 · ДЕТ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ДЕТ/macro</span><span class="tag fx">резко на рез, фон-боке</span></div>
+    <p>МАКРО искр + ровная кромка детали после реза. Главный визуальный акцент.</p>
+    <dl><div><dt>ЗК</dt><dd>«…без допусков «на глаз»».</dd></div></dl>
+    <span class="titr">ТОЧНОСТЬ ДО ДЕСЯТЫХ</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К16<small>53–57 · СР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">СР</span><span class="tag fx">ГРИП на инструменте</span><span class="tag snd">🎵 КЛИК = шкала</span></div>
+    <p><b>ОТК / ISO.</b> Стол контроля, мастер ставит деталь под штангенциркуль.</p>
+    <dl><div><dt>ЗК</dt><dd>«Каждый размер проходит ОТК…»</dd></div></dl>
+    <span class="titr">КОНТРОЛЬ КАЧЕСТВА · ISO 9001:2015</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К17<small>57–61 · КР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">КР</span><span class="tag fx">rack: журнал→деталь</span></div>
+    <p>Рука ставит штамп ОТК / отметку в журнале. Деталь принята.</p>
+    <dl><div><dt>ЗК</dt><dd>«…по стандарту ISO 9001».</dd></div></dl>
+  </div></div>
+
+  <div class="rhythm">
+    <h4>РИТМ-БЛОК · К18–К21 · 61–68 · концентрат «оркестра» (~1.5 с/кадр)</h4>
+    <div class="beats">
+      <span class="beat">К18 · ДЕТ<br><b>стружка фрезы</b> (бас)</span>
+      <span class="beat">К19 · ДЕТ<br><b>искра лазера</b> (стаккато)</span>
+      <span class="beat">К20 · ДЕТ<br><b>хлопок вакуума</b> (бочка)</span>
+      <span class="beat">К21 · КР<br><b>клик штангенциркуля</b> (хай-хэт)</span>
+    </div>
+    <p class="mut" style="margin:4px 0 0;font-size:13.5px">4 акцента на доли, процессы сливаются в ритм. ЗК: «От образца до серии — под одной крышей. Без посредников».</p>
+  </div>
+
+  <!-- 4 ДОКАЗАТЕЛЬСТВА -->
+  <div class="part-head goal"><span class="part-no">4</span><span class="part-title">Доказательства · нам доверяют</span><span class="part-time">68–90 сек</span></div>
+  <p class="part-desc">Самый важный блок для B2B. Реальные изделия в реальном применении. Продаёт сильнее искр.</p>
+
+  <div class="shot"><div class="shot-id">К22<small>68–72 · СР→ОБЩ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">СР→ОБЩ</span><span class="tag fx">rack: деталь→изделие</span></div>
+    <p>Готовое изделие НПП <b>установлено на месте</b>: интерьер кабины / приборная панель. Видно качество.</p>
+    <dl><div><dt>ЗК</dt><dd>«25 лет мы делаем детали для тех, кто не прощает брака…»</dd></div></dl>
+    <span class="titr">25+ ЛЕТ · СОТНИ ПРОЕКТОВ</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К23<small>72–77 · ОБЩ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ОБЩ</span><span class="tag fx">на изделии</span></div>
+    <p>Кейсы: кабина Урал / Mercedes / Iveco (реальные детали или архивные фото в красивой подаче).</p>
+    <dl><div><dt>ЗК</dt><dd>«…интерьеры кабин Урал, Mercedes, Iveco…»</dd></div></dl>
+    <span class="titr">УРАЛ · MERCEDES · IVECO · ПАЗ</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К24<small>77–81 · ОБЩ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ОБЩ</span><span class="tag fx">деталь в составе изделия</span></div>
+    <p>Спецтехника: бульдозер / трубоукладчик, узлы из пластика НПП. Приборостроение — корпус прибора.</p>
+    <dl><div><dt>ЗК</dt><dd>«…узлы для спецтехники и приборостроения».</dd></div></dl>
+    <span class="titr">СПЕЦТЕХНИКА · ПРИБОРОСТРОЕНИЕ</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К25<small>81–85 · ДАЛ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ДАЛ</span><span class="tag fx">глубокий</span></div>
+    <p>Стеллажи/ряды разнообразной готовой продукции — масштаб и широта номенклатуры.</p>
+    <dl><div><dt>ЗК</dt><dd>«Сотни проектов. Серии любого объёма».</dd></div></dl>
+    <span class="titr">СЕРИИ ЛЮБОГО ОБЪЁМА</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К26<small>85–90 · ОБЩ→ДАЛ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ОБЩ→ДАЛ</span><span class="tag fx">контраст темно→светло</span></div>
+    <p>Маркированные паллеты, погрузка, ворота, свет — продукция уходит точно в срок.</p>
+    <dl><div><dt>ЗК</dt><dd>«В срок».</dd></div></dl>
+    <span class="titr">В СРОК</span>
+  </div></div>
+
+  <!-- 5 ОФФЕР -->
+  <div class="part-head goal"><span class="part-no">5</span><span class="part-title">Оффер + призыв · следующий шаг</span><span class="part-time">90–106 сек</span></div>
+  <p class="part-desc">Даём заказчику конкретное действие и снимаем риск.</p>
+
+  <div class="shot"><div class="shot-id">К27<small>90–95 · КР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">КР</span><span class="tag fx">собирается на чертёж+деталь</span><span class="tag snd">музыка теплеет</span></div>
+    <p>Крупно стол: <b>деталь + чертёж + флешка</b> рядом. Рука инженера НПП придвигает их к себе — «давайте сюда, разберёмся».</p>
+    <dl><div><dt>ЗК</dt><dd>«Пришлите чертёж или образец — и получите расчёт».</dd></div></dl>
+    <span class="titr">ПРИШЛИТЕ ЧЕРТЁЖ ИЛИ ОБРАЗЕЦ</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К28<small>95–100 · СР</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">СР</span><span class="tag fx">rack: рука→деталь к камере</span></div>
+    <p><b>Сильный оффер.</b> Мастер протягивает в кадр <b>первую пробную деталь</b> — отдаёт зрителю.</p>
+    <dl><div><dt>ЗК</dt><dd>«Первую, пробную деталь делаем по себестоимости».</dd></div></dl>
+    <span class="titr offer">ПРОБНАЯ ДЕТАЛЬ — ПО СЕБЕСТОИМОСТИ</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К29<small>100–106 · ОБЩ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ОБЩ</span><span class="tag fx">собирается на изделие</span><span class="tag snd">аккорд → чистая нота</span></div>
+    <p>Герой-кадр: готовое изделие в красивом свете или общий план цеха с мастерами в контровом.</p>
+    <dl><div><dt>ЗК</dt><dd>«НижПромПласт».</dd></div></dl>
+  </div></div>
+
+  <!-- 6 КОДА -->
+  <div class="part-head"><span class="part-no">6</span><span class="part-title">Кода</span><span class="part-time">106–115 сек</span></div>
+
+  <div class="shot"><div class="shot-id">К30<small>106–111 · ЛОГО</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">ЛОГО</span><span class="tag fx">собирается из блика</span><span class="tag snd">финальный аккорд → пауза</span></div>
+    <p>Логотип <b>НижПромПласт</b> собирается из расфокуса на чистом фоне.</p>
+    <dl><div><dt>ЗК</dt><dd>«Производим то, что вы придумали».</dd></div></dl>
+    <span class="titr">ЛОГО + слоган</span>
+  </div></div>
+
+  <div class="shot"><div class="shot-id">К31<small>111–115 · КОНТАКТЫ</small></div><div class="shot-body">
+    <div class="shot-tags"><span class="tag cr">плашка</span><span class="tag snd">хвост, затухание</span></div>
+    <p>Контакты: <b>npp-nn.ru</b> · телефоны · «Нижний Новгород, Московское шоссе, 105А» · ISO 9001 · напоминание оффера. QR (опц.).</p>
+    <span class="titr">npp-nn.ru · +7 (915) 958-43-07</span>
+  </div></div>
+</section>
+
+<!-- ЗАКАДР -->
+<section id="vo">
+  <h2>Закадровый текст</h2>
+  <h3>Целиком · ~150 слов · ~115 сек</h3>
+  <blockquote>
+    <span class="vo-mut">Тон: с заказчиком на равных, без пафоса и воды. Начало — не вопросы-зазывалки, а спокойная констатация задач, которые мы закрываем каждый день. Везде настоящее время — не обещания, а то, как мы работаем.</span>
+    <span class="q">Изношенная деталь, к которой не осталось чертежей.<br>
+    Партия в десять штук — или в десять тысяч.<br>
+    Идея, которой ещё нет в металле.</span><br>
+    Для НижПромПласт — обычная работа.<br><br>
+    3D-сканирование снимает размеры с любой детали — даже без документации.<br>
+    Конструкторы считают, технологи готовят оснастку на станках ЧПУ.<br>
+    Вакуумная формовка, стеклопластик, пенополиуретан — технология под конкретную деталь.<br>
+    Лазерная резка держит контур без допусков «на глаз».<br>
+    Каждый размер проходит ОТК по стандарту ISO 9001.<br>
+    От образца до серии — под одной крышей. Без посредников.<br><br>
+    25 лет мы делаем детали для тех, кто не прощает брака: интерьеры кабин Урал, Mercedes, Iveco, узлы для спецтехники и приборостроения.<br>
+    Сотни проектов. Серии любого объёма. В срок.<br><br>
+    <span class="ofr">Пришлите чертёж или образец — и получите расчёт. Первую, пробную деталь делаем по себестоимости.</span><br><br>
+    <b style="color:var(--acc)">НижПромПласт. Производим то, что вы придумали.</b>
+  </blockquote>
+</section>
+
+<!-- ТИТРЫ -->
+<section id="titres">
+  <h2>Список титров</h2>
+  <h3>Для дизайнера графики</h3>
+  <div class="card">
+    <div class="titres-list">
+      <span>ПОЛНЫЙ ЦИКЛ ПОД ОДНОЙ КРЫШЕЙ</span>
+      <span>3D-СКАНИРОВАНИЕ · РЕИНЖИНИРИНГ</span>
+      <span>ПРОЕКТИРОВАНИЕ</span>
+      <span>ФРЕЗЕРОВКА ЧПУ</span>
+      <span>ВАКУУМНАЯ ФОРМОВКА</span>
+      <span>СТЕКЛОПЛАСТИК</span>
+      <span>ИЗДЕЛИЯ ИЗ ППУ</span>
+      <span>ТОЧНОСТЬ ДО ДЕСЯТЫХ</span>
+      <span>КОНТРОЛЬ КАЧЕСТВА · ISO 9001:2015</span>
+      <span>25+ ЛЕТ · СОТНИ ПРОЕКТОВ</span>
+      <span>УРАЛ · MERCEDES · IVECO · ПАЗ</span>
+      <span>СПЕЦТЕХНИКА · ПРИБОРОСТРОЕНИЕ</span>
+      <span>СЕРИИ ЛЮБОГО ОБЪЁМА</span>
+      <span>В СРОК</span>
+      <span>ПРИШЛИТЕ ЧЕРТЁЖ ИЛИ ОБРАЗЕЦ</span>
+      <span class="key">ПРОБНАЯ ДЕТАЛЬ — ПО СЕБЕСТОИМОСТИ</span>
+      <span>npp-nn.ru · +7 (915) 958-43-07</span>
+    </div>
+    <p class="mut" style="margin:16px 0 0;font-size:14px">Ключевой оффер (розовый) — выделить графически, это главный крючок ролика.</p>
+  </div>
+</section>
+
+<!-- ШОТ-ЛИСТ -->
+<section id="shotlist">
+  <h2>Шот-лист для смены</h2>
+  <h3>По блокам</h3>
+  <div class="card warn">
+    <p style="margin:0">⚠️ <b>Два приоритета:</b> (1) писать чистый звук каждого станка — для трека; (2) блок доказательств (кейсы, готовые изделия) — не экономить, он продаёт сильнее всего.</p>
+  </div>
+  <div class="grid2 checklist">
+    <div class="card">
+      <h4>Крючок (К1–К3)</h4>
+      <ul class="clean">
+        <li>старая изношенная деталь на столе ОТК (КР + макро)</li>
+        <li>инженер «нет документации» / пустая папка</li>
+        <li>карандашный эскиз рядом с деталью</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Обещание (К4–К5)</h4>
+      <ul class="clean">
+        <li>широкий план цеха, мастера за станками</li>
+        <li>проброс-проводка мимо нескольких этапов</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Цикл (К6–К21)</h4>
+      <ul class="clean">
+        <li>3D-сканер по детали из крючка + монитор облако→модель</li>
+        <li>конструктор за CAD</li>
+        <li>фреза ЧПУ + стружка (звук-бас)</li>
+        <li>вакуум, термошкаф (таймлапс, штатив) (звук-бочка)</li>
+        <li>стеклопластик: валик (звук-шейкер); ППУ: руки</li>
+        <li>мастер с готовой деталью к свету</li>
+        <li>лазер: общий + МАКРО искр — много! (звук-стаккато)</li>
+        <li>ОТК: штангенциркуль (звук-клик), штамп/журнал</li>
+        <li>4 макро для ритм-блока: стружка/искра/вакуум/клик</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Доказательства (К22–К26) — приоритет!</h4>
+      <ul class="clean">
+        <li>готовые изделия на технике/стенде (кабина, панель)</li>
+        <li>кейсы: Урал / Mercedes / Iveco / ПАЗ (детали/фото)</li>
+        <li>спецтехника, приборостроение (узлы)</li>
+        <li>стеллажи разнообразной продукции</li>
+        <li>паллеты, маркировка, погрузка, ворота</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Оффер (К27–К31)</h4>
+      <ul class="clean">
+        <li>стол: деталь + чертёж + флешка, рука придвигает</li>
+        <li>мастер протягивает пробную деталь к камере</li>
+        <li>герой-кадр изделия / цеха</li>
+        <li>чистый фон под лого и контакты</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ПРОДАКШН -->
+<section id="notes">
+  <h2>Продакшн-заметки</h2>
+  <h3>Что важно на площадке</h3>
+  <ul class="clean">
+    <li><b>Оптика/техника:</b> слайдер, gimbal, штатив (таймлапсы), светосильный объектив f/1.8–2.8, макро. Петличка/пушка для звука станков — критично.</li>
+    <li><b>Свет:</b> контровой на каждом рабочем месте; искры лазера = бесплатный объём.</li>
+    <li><b>Режиссура людей:</b> простые задачи — «возьми деталь, поверни к свету, придвинь чертёж». Медленно, чётко, до чистого дубля. Спецодежда/очки/перчатки обязательно.</li>
+    <li><b>Блок доказательств — не экономить.</b> Нет доступа к технике — снять готовые изделия крупно на стенде + архивные фото проектов в красивой подаче.</li>
+    <li><b>Монтаж:</b> под трек с чёткой долей; ритм-блок на удар; звуки цехов поверх. Темп человечный (1.5–2 с), без клиповости.</li>
+    <li><b>Оффер «пробная деталь по себестоимости»</b> — реальное предложение с сайта НПП. Сильнейший крючок, выносим в титр и в финал отдельно.</li>
+  </ul>
+
+  <div class="card accent" style="margin-top:24px">
+    <p style="font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:8px">Следующий шаг</p>
+    <p style="margin:0">① Утвердить v3.0, текст и список кейсов (какие реально можно показать — Урал/Mercedes/др.) → ② Рисованная раскадровка по 31 кадру → ③ Звукорежиссёру таблицу «инструментов» → ④ Печать шот-листа.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Реж-сценарий ООО «НижПромПласт» · v3.0 «Гибрид» — визуал оркестра + драматургия заказчика<br>
+  npp-nn.ru · Нижний Новгород, Московское шоссе, 105А · <a class="up" href="#">↑ наверх</a></p>
+</footer>
+
+</div>
+</body>
+</html>
