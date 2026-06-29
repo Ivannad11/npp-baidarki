@@ -143,5 +143,13 @@
   if(b){b.addEventListener('click',function(){n.classList.toggle('is-open');});}
 </script>
 <script>function nppMail(f,s){var d=[];f.querySelectorAll("input,select,textarea").forEach(function(e){if(e.type=="submit"||e.type=="hidden")return;if(e.type=="checkbox"&&!e.checked)return;var v=(e.value||"").trim();if(v&&v!=e.getAttribute("placeholder"))d.push((e.getAttribute("placeholder")||e.name||"Поле")+": "+v)});window.location.href="mailto:shakolin@npp-nn.ru?subject="+encodeURIComponent(s)+"&body="+encodeURIComponent(d.join("\n"));return false;}</script>
+<a href="tel:+79202519547" class="npp-call-fab" aria-label="Позвонить +7 920 251-95-47" title="Позвонить"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 3.6c.5 0 .95.32 1.13.8l1.02 2.62c.18.47.07.99-.29 1.35l-1.06 1.04c-.22.22-.28.55-.13.83a11.2 11.2 0 0 0 4.55 4.55c.28.15.61.09.83-.13l1.04-1.06c.36-.36.88-.47 1.35-.29l2.62 1.02c.48.18.8.63.8 1.13v2.62c0 .82-.69 1.5-1.51 1.43C9.74 20.6 3.4 14.26 3.17 6.71 3.1 5.89 3.78 5.2 4.6 5.2h2z"/></svg></a>
+<style>
+.npp-call-fab{position:fixed;right:22px;bottom:22px;width:62px;height:62px;border-radius:50%;background:#140d5e;border:1.5px solid #0a0730;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(20,13,94,.45);z-index:99999;transition:transform .18s ease,box-shadow .18s ease;animation:nppCallPulse 2.4s infinite}
+.npp-call-fab:hover{transform:scale(1.08);box-shadow:0 10px 28px rgba(20,13,94,.6)}
+.npp-call-fab:active{transform:scale(.96)}
+@keyframes nppCallPulse{0%{box-shadow:0 8px 22px rgba(20,13,94,.45),0 0 0 0 rgba(20,13,94,.35)}70%{box-shadow:0 8px 22px rgba(20,13,94,.45),0 0 0 16px rgba(20,13,94,0)}100%{box-shadow:0 8px 22px rgba(20,13,94,.45),0 0 0 0 rgba(20,13,94,0)}}
+@media(max-width:600px){.npp-call-fab{width:54px;height:54px;right:16px;bottom:16px}.npp-call-fab svg{width:26px;height:26px}}
+</style>
 </body>
 </html>
