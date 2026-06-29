@@ -73,7 +73,7 @@ img.image-138 {            /* логотип в блоке «Выберите с
    ГЕРО: фоновое фото + тёмный оверлей, текст белый
    ============================================================ */
 #promo{
-  background-image:linear-gradient(rgba(6,3,34,.62), rgba(8,5,34,.68)), url('../assets/hero-bg.jpg') !important;
+  background-image:linear-gradient(rgba(6,3,34,.62), rgba(8,5,34,.68)), url('../assets/hero-bg.jpg?v=2') !important;
   background-size:cover !important;
   background-position:center 30% !important;
   background-repeat:no-repeat !important;
@@ -306,7 +306,7 @@ h3.heading_2{ padding-left:clamp(20px,5vw,72px) !important; }
 /* ============================================================
    ГЕРОЙ — чистый адаптивный (фото-фон + оверлей)
    ============================================================ */
-.npp-hero{position:relative;color:#fff;background:linear-gradient(rgba(6,3,34,.6),rgba(8,5,34,.72)),url('../assets/hero-bg.jpg');background-size:cover;background-position:center 30%;font-family:Rubik,-apple-system,sans-serif;}
+.npp-hero{position:relative;color:#fff;background:linear-gradient(rgba(6,3,34,.6),rgba(8,5,34,.72)),url('../assets/hero-bg.jpg?v=2');background-size:cover;background-position:center 30%;font-family:Rubik,-apple-system,sans-serif;}
 .npp-hero__inner{max-width:1200px;margin:0 auto;padding:clamp(64px,11vw,140px) clamp(20px,5vw,72px);box-sizing:border-box;}
 .npp-hero__badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);font-size:13px;font-weight:700;letter-spacing:.04em;margin-bottom:22px;}
 .npp-hero h1{font-size:clamp(32px,6vw,58px);font-weight:800;line-height:1.08;margin:0 0 18px;max-width:18ch;letter-spacing:-0.02em;}
